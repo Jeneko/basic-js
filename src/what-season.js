@@ -1,5 +1,3 @@
-const { NotImplementedError } = require('../extensions/index.js');
-
 /**
  * Extract season from given date and expose the enemy scout!
  * 
@@ -11,9 +9,41 @@ const { NotImplementedError } = require('../extensions/index.js');
  * getSeason(new Date(2020, 02, 31)) => 'spring'
  * 
  */
-function getSeason(/* date */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+
+function getSeason(date) {
+  if (date === undefined) {
+    return 'Unable to determine the time of year!';
+  }
+
+  if (
+    date instanceof Date === false ||
+    Object.getOwnPropertyDescriptor(date, 'toString')
+  ) {
+    throw new Error('Invalid date!');
+  }
+
+  let month = date.getMonth();
+  month++;
+
+  if (month > 2 && month < 6) {
+    return 'spring';
+  }
+
+  if (month > 5 && month < 9) {
+    return 'summer';
+  }
+
+  if (month > 8 && month < 9) {
+    return 'summer';
+  }
+
+  if (month > 8 && month < 12) {
+    return 'autumn';
+  }
+
+  if (month > 11 || month < 3) {
+    return 'winter';
+  }
 }
 
 module.exports = {
